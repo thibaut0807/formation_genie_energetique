@@ -1,144 +1,49 @@
-from zipfile import ZipFile
-import os
-
-# Créer les fichiers HTML avec le contenu approprié
-index_html = """
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Formation en Génie Énergétique</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      background-color: #f0f4f5;
-      color: #333;
-    }
-    header {
-      background-color: #005f53;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    main {
-      display: flex;
-      justify-content: center;
-      margin-top: 50px;
-    }
-    .form-container {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 100%;
-    }
-    h2 {
-      color: #005f53;
-    }
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
-    button {
-      background-color: #005f53;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #007265;
-    }
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      color: #666;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Bienvenue à la formation en Génie Énergétique</h1>
-    <p>Par Codjo Thibaut GBAMINTON</p>
-  </header>
-  <main>
-    <div class="form-container">
-      <h2>Inscrivez-vous dès maintenant</h2>
-      <form action="https://formspree.io/f/xldnrnlq" method="POST">
-        <label for="nom">Nom complet :</label>
-        <input type="text" id="nom" name="nom" required />
-
-        <label for="email">Adresse email :</label>
-        <input type="email" id="email" name="email" required />
-
-        <button type="submit">S'inscrire</button>
-      </form>
-    </div>
-  </main>
-  <footer>
-    © 2025 Codjo Thibaut GBAMINTON - Tous droits réservés
-  </footer>
-</body>
-</html>
-"""
-
-merci_html = """
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Merci</title>
+  <title>Merci pour votre inscription</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f8f6;
     }
-    .message-box {
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    .container {
+      max-width: 600px;
+      margin: 100px auto;
+      background-color: white;
+      padding: 40px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     h1 {
-      color: #005f53;
+      color: #00695c;
+      font-size: 26px;
+    }
+    p {
+      font-size: 16px;
+      color: #333;
+    }
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 12px;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <div class="message-box">
+  <div class="container">
     <h1>Merci pour votre inscription !</h1>
-    <p>Nous vous contacterons bientôt par email.</p>
+    <p>Nous vous contacterons dans les meilleurs délais par courrier électronique.</p>
   </div>
+
+  <footer>
+    © 2025 Codjo Thibaut GBAMINTON – Tous droits réservés
+  </footer>
 </body>
 </html>
-"""
-
-# Enregistrer les fichiers HTML dans un dossier temporaire
-output_dir = "/mnt/data/formation_genie_energetique"
-os.makedirs(output_dir, exist_ok=True)
-with open(os.path.join(output_dir, "index.html"), "w", encoding="utf-8") as f:
-    f.write(index_html)
-with open(os.path.join(output_dir, "merci.html"), "w", encoding="utf-8") as f:
-    f.write(merci_html)
-
-# Créer le fichier ZIP
-zip_path = "/mnt/data/formation_genie_energetique.zip"
-with ZipFile(zip_path, "w") as zipf:
-    zipf.write(os.path.join(output_dir, "index.html"), "index.html")
-    zipf.write(os.path.join(output_dir, "merci.html"), "merci.html")
-
-zip_path  # Renvoie le chemin du fichier ZIP généré
-
